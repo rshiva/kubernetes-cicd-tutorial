@@ -13,6 +13,17 @@ app.get('/grades', (req, res) => {
   res.json(grades);
 });
 
+app.get('/grades/:id', (req, res) => {
+  const { id } = req.params;
+  const result = grades[id];
+
+  if (result) {
+    res.json(result);
+  } else {
+    res.status(404).send('Grade not found');
+  }
+});
+
 app.post('/grades', (req, res) => {
   const { name, subject, score } = req.body;
   const id = Date.now().toString();
